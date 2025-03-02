@@ -46,7 +46,7 @@
     </footer>
     
     <script>
-        fetch('blog.json').then(response => response.json()).then(
+        fetch('/thinkwithdivyansh/blog.json').then(response => response.json()).then(
             data => {
                 let urlParams = new URLSearchParams(window.location.search);
                 let post = urlParams.get("post");
