@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blog | ThinkWithDivyansh</title>
+    <title id="title"></title>
     <link rel="stylesheet" href="../styles/style.css">
 </head>
 <body>
@@ -11,23 +11,22 @@
         <ul>
             <li><a href="/thinkwithdivyansh/">Home</a></li>
             <li><a href="/thinkwithdivyansh/blog/">Blog</a></li>
-            <li><a href="/thinkwithdivyansh.about.html">About</a></li>
+            <li><a href="/thinkwithdivyansh/about.html">About</a></li>
             <li><a href="https://www.linkedin.com/in/divyansh-sharma-02ba1b307" target="_blank">Contact</a></li>
             <!-- <li><a href="/projects.html">Projects</a></li> -->
         </ul>
     </nav>
     <header>
-        <h1 class="heading">Blog</h1>
-        <h2 class="subheading">Insights on Technology, Learning and Growth</h2>
+        <h1 class="heading" id="heading"></h1>
     </header>
     <main>
-        <div id="blogs"></div>
+        <p id="content"></p>
     </main>
     <footer>
         <div class="footer-container">
             <div class="footer-section">
                 <h3>About Me</h3>
-                <p>I'm passionate about AI, programming, success, and philosophy.</p>
+                <p>I'm passionate about AI, programming and success.</p>
             </div>
             <div class="footer-section">
                 <h3>Quick Links</h3>
@@ -45,26 +44,17 @@
         </div>
         <p class="copyright">© 2025 ThinkWithDivyansh All Rights Reserved.</p>
     </footer>
+    
     <script>
-        fetch("blog.json").then(response => response.json()).then(data => {
-            let keys = Object.keys(data.blogs);
-            let posts = Object.values(data.blogs);
-            posts.sort((a, b) => new Date(b.date_created) - new Date(a.date_created)); 
-            for (let i = 0; i < posts.length; i++) {
-                let post = document.createElement("div")
-                let post_head = document.createElement("h3")
-                let post_desc = document.createElement("p")
-                post_head.innerText = posts[i].title;
-                post_desc.innerText = posts[i].desc;
-                post.addEventListener("click", function(event) {
-                    event.preventDefault();
-                    window.location = "/blog/blog.html?post="+(keys[i]);
-                })
-                post.appendChild(post_head);
-                post.appendChild(post_desc);
-                document.getElementById("blogs").appendChild(post);
+        fetch('blog.json').then(response => response.json()).then(
+            data => {
+                let urlParams = new URLSearchParams(window.location.search);
+                let post = urlParams.get("post");
+                document.getElementById("title").innerHTML = data["blogs"][post].title;
+                document.getElementById("heading").innerHTML = data["blogs"][post].title;
+                document.getElementById("content").innerHTML = data["blogs"][post].content;
             }
-        })
+        )
     </script>
 </body>
 </html>

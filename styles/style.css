@@ -17,6 +17,13 @@ header {
     color: #333333;
 }
 
+.heading {
+    font-size: 45px;
+}
+.subheading {
+    font-size: 24px;
+}
+
 nav {
     background-color: var(--theme-color);
     height: 60px;
@@ -65,9 +72,94 @@ nav ul li, a {
 
 .btn {
     margin: 30px 0;
-    padding: 15px 10px;
+    padding: 16px 12px;
     background-color: var(--theme-color);
     color: white;
     border: none;
     border-radius: 10px;
+    cursor: pointer;
+}
+
+#blogs {
+    display: flex;
+    flex-direction: column;
+}
+
+.post, #blogs div {
+    margin: 40px 40px;
+    width: max-content;
+}
+
+.post h3, #blogs div h3  {
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.post p, #blogs div p {
+    font-size: 16px;
+    cursor: pointer;
+}
+
+#posts_heading {
+    margin: 40px 40px;
+    font-size: 32px;
+}
+
+#content {
+    margin: 20px 40px;
+    font-size: 19px;
+}
+
+.styled-line {
+    border: none; 
+    height: 2px; 
+    background-color: #0077B6; 
+    width: 100%;
+}
+
+footer {
+    background-color: #222;
+    color: white;
+    text-align: center;
+    padding: 20px 0;
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    max-width: 1000px;
+    margin: auto;
+}
+
+.footer-section {
+    width: 30%;
+}
+
+.footer-section h3 {
+    color: #ffcc00; /* Highlighted heading */
+}
+
+.footer-section ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-section ul li {
+    margin: 5px 0;
+}
+
+.footer-section a {
+    color: #ffcc00;
+    text-decoration: none;
+}
+
+.footer-section a:hover {
+    text-decoration: underline;
+}
+
+.copyright {
+    margin-top: 10px;
+    font-size: 14px;
+    opacity: 0.7;
 }

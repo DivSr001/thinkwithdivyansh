@@ -10,11 +10,11 @@
 <body>
     <nav>
         <ul>
-            <li><a href="/">Home</a></li>
-            <li><a href="/blog/">Blog</a></li>
-            <li><a href="/about.html">About</a></li>
+            <li><a href="/thinkwithdivyansh/">Home</a></li>
+            <li><a href="/thinkwithdivyansh/blog/">Blog</a></li>
+            <li><a href="/thinkwithdivyansh/about.html">About</a></li>
             <li><a href="https://www.linkedin.com/in/divyansh-sharma-02ba1b307" target="_blank">Contact</a></li>
-            <li><a href="/projects.html">Projects</a></li>
+            <!-- <li><a href="/projects.html">Projects</a></li> -->
         </ul>
     </nav>
     <header>
@@ -26,15 +26,49 @@
             <div class="about_me_text">
                 <h2>About Me</h2>
                 <p>I am a Student currently studying in class 10. I'm familiar with back-end web development using Python. As of now, I am exploring other applications of Python such as AI. For my academics, I'm a JEE Aspirant and am aiming for the IITs. You're welcome to explore my thoughts and insights on my blog. </p>
-                <button class="btn"><a href="/blog/">Explore Blog</a></button>
+                <a href="/thinkwithdivyansh/blog/"><button class="btn">Explore Blog</button></a>
             </div>
             <img id="home_img" src="styles/home_img.webp" alt="home_img">
         </div>
-        <hr style="border: none; height: 2px; background-color: #0077B6; width: 100%;"/>
-        <div class="posts">
-
+        <hr class="styled-line"/>
+        <h2 id="posts_heading">Latest Posts</h2>
+        <div id="blogs">
+            <div class="post">
+                <h3 id="post_title_1"></h3>
+                <p id="post_desc_1"></p>
+            </div>
+            <div class="post">
+                <h3 id="post_title_2"></h3>
+                <p id="post_desc_2"></p>
+            </div>
+            <div class="post">
+                <h3 id="post_title_3"></h3>
+                <p id="post_desc_3"></p>
+            </div>
         </div>
     </main>
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>About Me</h3>
+                <p>I'm passionate about AI, programming and success.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="/thinkwithdivyansh/">Home</a></li>
+                    <li><a href="/thinkwithdivyansh/about.html">About</a></li>
+                    <li><a href="/thinkwithdivyansh/blog/">Blogs</a></li>
+                    <li><a href="https://www.linkedin.com/in/divyansh-sharma-02ba1b307" target="_blank">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Connect</h3>
+                <a href="https://www.linkedin.com/in/divyansh-sharma-02ba1b307">LinkedIn</a>
+            </div>
+        </div>
+        <p class="copyright">© 2025 ThinkWithDivyansh All Rights Reserved.</p>
+    </footer>
     <script>
         var typed = new Typed("#typing", {
             strings: ["a Web Developer", "a Tech Enthusiast", "an AI/ML Enthusiast", "a Student", "a Python Developer"],
@@ -44,6 +78,23 @@
             startDelay: 500, // Delay before typing starts
             loop: true       // Loop the animation infinitely
         });
+        fetch('/blog/blog.json').then(response => response.json()).then(
+            data => {
+                let posts = Object.entries(data.blogs)
+                posts.sort((a, b) => new Date(b[1].date_created) - new Date(a[1].date_created)); 
+                let top3 = posts.slice(0, 3);
+                for (let i = 0; i < 3; i++) {
+                    let postKey = top3[i][0];
+                    let postData = top3[i][1];
+                    document.getElementById("post_title_"+(i+1)).addEventListener("click", function(event){
+                        event.preventDefault();
+                        window.location = "/thinkwithdivyansh/blog/blog.html?post="+postKey;
+                    })
+                    document.getElementById("post_title_"+(i+1)).innerHTML = postData.title;
+                    document.getElementById("post_desc_"+(i+1)).innerHTML = postData.desc;
+                }
+            }
+        )
     </script>
     
 </body>
